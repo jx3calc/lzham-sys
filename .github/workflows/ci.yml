@@ -96,7 +96,7 @@ jobs:
 
     - name: Install libc++ (Linux)
       if: matrix.os == 'ubuntu-18.04'
-      run: sudo apt-get install -y libc++-dev
+      run: sudo apt-get install -y libc++1
 
     - name: Install Rust
       uses: actions-rs/toolchain@v1
