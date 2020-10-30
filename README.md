@@ -10,7 +10,7 @@ Add the following to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-lzham-sys = "0.1.0"
+lzham-sys = "0.1.1"
 ```
 
 ## Linking
