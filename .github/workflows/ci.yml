@@ -88,6 +88,11 @@ jobs:
     - name: Setup cmake
       uses: lukka/get-cmake@latest
 
+    - name: Setup MSYS2
+      if: matrix.os == 'windows-2019'
+      uses: msys2/setup-msys2@v2
+
+
     - name: Install libc++ (Windows)
       if: matrix.os == 'windows-2019'
       run: pacman -S mingw-w64-x86_64-libc++
