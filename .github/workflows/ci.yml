@@ -88,6 +88,10 @@ jobs:
     - name: Setup cmake
       uses: lukka/get-cmake@latest
 
+    - name: Install libc++ (Windows)
+      if: matrix.os = 'windows-2019'
+      run: pacman -S mingw-w64-x86_64-libc++
+
     - name: Install Rust
       uses: actions-rs/toolchain@v1
       with:
