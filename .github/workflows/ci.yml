@@ -94,6 +94,10 @@ jobs:
       with:
         install: mingw-w64-x86_64-libc++
 
+    - name: Install libc++ (Linux)
+      if: matrix.os == 'ubuntu-18.04'
+      run: sudo apt-get install -y libc++-dev
+
     - name: Install Rust
       uses: actions-rs/toolchain@v1
       with:
