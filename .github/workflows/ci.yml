@@ -27,12 +27,12 @@ jobs:
         - stable
         - beta
         - nightly
-        - musl
-        - gnu-32
-        - musl-32
-        - mips
-        - arm
-        - aarch
+        # - musl
+        # - gnu-32
+        # - musl-32
+        # - mips
+        # - arm
+        # - aarch
         - macos
         - win-msvc
         - win-gnu
@@ -46,30 +46,30 @@ jobs:
         - build: nightly
           os: ubuntu-18.04
           rust: nightly
-        - build: musl
-          os: ubuntu-18.04
-          rust: stable
-          target: x86_64-unknown-linux-musl
-        - build: gnu-32
-          os: ubuntu-18.04
-          rust: stable
-          target: i686-unknown-linux-gnu
-        - build: musl-32
-          os: ubuntu-18.04
-          rust: stable
-          target: i686-unknown-linux-musl
-        - build: mips
-          os: ubuntu-18.04
-          rust: stable
-          target: mips64-unknown-linux-gnuabi64
-        - build: arm
-          os: ubuntu-18.04
-          rust: stable
-          target: arm-unknown-linux-gnueabihf
-        - build: aarch
-          os: ubuntu-18.04
-          rust: stable
-          target: aarch64-unknown-linux-gnu
+        # - build: musl
+        #   os: ubuntu-18.04
+        #   rust: stable
+        #   target: x86_64-unknown-linux-musl
+        # - build: gnu-32
+        #   os: ubuntu-18.04
+        #   rust: stable
+        #   target: i686-unknown-linux-gnu
+        # - build: musl-32
+        #   os: ubuntu-18.04
+        #   rust: stable
+        #   target: i686-unknown-linux-musl
+        # - build: mips
+        #   os: ubuntu-18.04
+        #   rust: stable
+        #   target: mips64-unknown-linux-gnuabi64
+        # - build: arm
+        #   os: ubuntu-18.04
+        #   rust: stable
+        #   target: arm-unknown-linux-gnueabihf
+        # - build: aarch
+        #   os: ubuntu-18.04
+        #   rust: stable
+        #   target: aarch64-unknown-linux-gnu
         - build: macos
           os: macos-latest
           rust: stable
