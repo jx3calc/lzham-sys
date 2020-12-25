@@ -72,8 +72,8 @@ fn main() {
     #[cfg(feature = "generate_binding")]
     generate_bindings();
 
-    // println!("cargo:rustc-link-lib=stdc++");
-    println!("cargo:rustc-flags=-l dylib=c++");
+    #[cfg(target_os = "macos")]
+    println!("cargo:rustc-link-lib=c++");
 
     let is_static = is_static_build();
 
