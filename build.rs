@@ -75,6 +75,9 @@ fn main() {
     #[cfg(target_os = "macos")]
     println!("cargo:rustc-link-lib=c++");
 
+    #[cfg(not(target_os = "macos"))]
+    println!("cargo:rustc-link-lib=stdc++");
+
     let is_static = is_static_build();
 
     let dst = if is_static {
