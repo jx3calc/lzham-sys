@@ -34,7 +34,7 @@ jobs:
         # - arm
         # - aarch
         - macos
-        - win-msvc
+        # - win-msvc
         - win-gnu
         include:
         - build: stable
