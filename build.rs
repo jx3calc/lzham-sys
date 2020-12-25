@@ -72,7 +72,8 @@ fn main() {
     #[cfg(feature = "generate_binding")]
     generate_bindings();
 
-    println!("cargo:rustc-link-lib=c++");
+    // println!("cargo:rustc-link-lib=stdc++");
+    println!("cargo:rustc-flags=-l dylib=c++");
 
     let is_static = is_static_build();
 
