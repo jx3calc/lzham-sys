@@ -121,7 +121,7 @@ jobs:
         echo "cargo command is: ${{ env.CARGO }}"
         echo "target flag is: ${{ env.TARGET_FLAGS }}"
     - name: Build sc_extract
-      run: ${{ env.CARGO }} build -vv --all ${{ env.TARGET_FLAGS }}
+      run: ${{ env.CARGO }} build -vv --all ${{ env.TARGET_FLAGS }} --features generate_binding
 
     - name: Run tests
       run: ${{ env.CARGO }} test -vv --all ${{ env.TARGET_FLAGS }}
