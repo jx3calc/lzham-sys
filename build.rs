@@ -10,15 +10,33 @@ fn generate_bindings() {
                                                  #![allow(non_snake_case)]\n\
                                                  #![allow(improper_ctypes)]\n";
 
-    let bindings = bindgen::Builder::default()
+    let mut bindings = bindgen::Builder::default()
         .header("src/wrapper.h")
-        .raw_line(ALLOW_UNCONVENTIONALS)
-        .generate()
-        .expect("Unable to generate bindings");
+        .raw_line(ALLOW_UNCONVENTIONALS);
 
     let binding_target_path = PathBuf::new().join("src").join("lib.rs");
 
+    // We need to override the target and sysroot for CLang on Windows GNU;
+    // see https://github.com/rust-lang/rust-bindgen/issues/1760
+    // #[cfg(all(windows, target_env = "gnu"))]
+    {
+        let target = env::var("TARGET").unwrap();
+
+        let bits = if cfg!(target_pointer_width = "32") {
+            32
+        } else {
+            64
+        };
+
+        let target_arg = format!("--target={}", target);
+        let sysroot_arg = format!(r#"--sysroot=C:\msys64\mingw{}\"#, bits);
+
+        bindings = bindings.clang_args(&[&target_arg, &sysroot_arg]);
+    }
+
     bindings
+        .generate()
+        .expect("Unable to generate bindings")
         .write_to_file(binding_target_path)
         .expect("Could not write binding to the file at `src/lib.rs`");
 
