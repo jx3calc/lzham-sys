@@ -18,7 +18,7 @@ fn generate_bindings() {
 
     // We need to override the target and sysroot for CLang on Windows GNU;
     // see https://github.com/rust-lang/rust-bindgen/issues/1760
-    // #[cfg(all(windows, target_env = "gnu"))]
+    #[cfg(all(windows, target_env = "gnu"))]
     {
         let target = env::var("TARGET").unwrap();
 
