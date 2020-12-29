@@ -88,17 +88,20 @@ jobs:
     - name: Setup cmake
       uses: lukka/get-cmake@latest
 
-    - name: Setup MSYS2 and Install libc++ (Windows)
-      if: matrix.os == 'windows-2019'
-      uses: msys2/setup-msys2@v2
-      with:
-        install:
-          mingw-w64-x86_64-libc++
-          mingw-w64-x86_64-libc++abi
+    # - name: Setup MSYS2 and Install libc++ (Windows)
+    #   if: matrix.os == 'windows-2019'
+    #   uses: msys2/setup-msys2@v2
+    #   with:
+    #     install:
+    #       mingw-w64-x86_64-libc++
+    #       mingw-w64-x86_64-libc++abi
 
-    - name: Add libclang to PATH (Windows)
-      if: matrix.os == 'windows-2019'
-      run: echo "C:\msys64\mingw64\bin" >> $GITHUB_PATH
+    # - name: Add libclang to PATH (Windows)
+    #   if: matrix.os == 'windows-2019'
+    #   run: echo "C:\msys64\mingw64\bin" >> $GITHUB_PATH
+    - name: Instal LLVM (Windows)
+      run: choco install -y llvm
+      if: runner.os == 'Windows'
 
     - name: Install libc++ (Linux)
       if: matrix.os == 'ubuntu-18.04'
