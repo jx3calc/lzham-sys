@@ -103,6 +103,10 @@ jobs:
       run: choco install -y llvm
       if: runner.os == 'Windows'
 
+    - name: Check if libclang exists
+      run: IF EXIST C:\\msys64\\mingw64\\bin\\libclang.dll ECHO the dll exists.
+      if: runner.os == 'Windows'
+
     - name: Install libc++ (Linux)
       if: matrix.os == 'ubuntu-18.04'
       run: sudo apt-get install -y libc++1
