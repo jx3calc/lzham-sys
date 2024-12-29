@@ -10,6 +10,13 @@ mod darwin;
 #[cfg(target_os = "macos")]
 pub use darwin::*;
 
+#[cfg(target_os = "linux")]
+#[cfg(target_env = "gnu")]
+mod linux_gnu;
+#[cfg(target_os = "linux")]
+#[cfg(target_env = "gnu")]
+pub use linux_gnu::*;
+
 #[test]
 fn hello() {
     let input_data = b"Hello, LZHAM!";
