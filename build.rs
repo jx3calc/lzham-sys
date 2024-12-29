@@ -61,14 +61,15 @@ fn generate_bindings() {
 /// Note that this is a helper function and may not be called if the `static` feature
 /// is enabled or the environment variable `LIBLZHAM_STATIC` or `LZHAM_STATIC` is set.
 fn default_library_linking() -> bool {
-    #[cfg(any(windows, target_os = "macos", target_env = "musl"))]
-    {
-        true
-    }
-    #[cfg(all(unix, target_env = "gnu"))]
-    {
-        false
-    }
+    // #[cfg(any(windows, target_os = "macos", target_env = "musl"))]
+    // {
+    //     true
+    // }
+    // #[cfg(all(unix, target_env = "gnu"))]
+    // {
+    //     false
+    // }
+    true
 }
 
 /// Checks if it is a static build.
