@@ -16,7 +16,7 @@ repository = "https://github.com/AriusX7/lzham-sys"
 cmake = "0.1.44"
 
 [build-dependencies.bindgen]
-version = "0.55.1"
+version = "0.69.5" # version >= 0.70.0 will will generate runtime layout test code, not unit tests.
 optional = true
 
 [features]

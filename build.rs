@@ -10,11 +10,16 @@ fn generate_bindings() {
                                                  #![allow(non_snake_case)]\n\
                                                  #![allow(improper_ctypes)]\n";
 
-    let mut bindings = bindgen::Builder::default()
+    let bindings = bindgen::Builder::default()
         .header("src/wrapper.h")
         .raw_line(ALLOW_UNCONVENTIONALS);
 
-    let binding_target_path = PathBuf::new().join("src").join("lib.rs");
+    let target = env::var("TARGET").unwrap();
+    let target_parts: Vec<&str> = target.split('-').collect();
+    let target_os = target_parts.get(2).unwrap_or(&"");
+    let target_env = target_parts.get(3).unwrap_or(&"");
+    let target_fn = format!("{}_{}.rs", target_os, target_env);
+    let binding_target_path = PathBuf::new().join("src").join(target_fn);
 
     // We need to override the target and sysroot for CLang on Windows GNU;
     // see https://github.com/rust-lang/rust-bindgen/issues/1760
@@ -93,17 +98,28 @@ fn main() {
     #[cfg(target_os = "macos")]
     println!("cargo:rustc-link-lib=c++");
 
-    #[cfg(not(target_os = "macos"))]
+    #[cfg(target_os = "linux")]
+    println!("cargo:rustc-link-lib=stdc++");
+
+    #[cfg(target_os = "windows")]
+    #[cfg(target_env = "msvc")]
+    println!("cargo:rustc-link-lib=msvcrt");
+
+    #[cfg(target_os = "windows")]
+    #[cfg(target_env = "gnu")]
     println!("cargo:rustc-link-lib=stdc++");
 
     let is_static = is_static_build();
 
     let dst = if is_static {
         Config::new("lzham_codec")
+            .define("CMAKE_BUILD_TYPE", "Release")
             .define("BUILD_SHARED_LIBS", "OFF")
             .build()
     } else {
-        cmake::build("lzham_codec")
+        Config::new("lzham_codec")
+            .define("CMAKE_BUILD_TYPE", "Release")
+            .build()
     };
 
     println!("cargo:rustc-link-search=native={}/lib", dst.display());
