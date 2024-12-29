@@ -18,7 +18,12 @@ fn generate_bindings() {
     let target_parts: Vec<&str> = target.split('-').collect();
     let target_os = target_parts.get(2).unwrap_or(&"");
     let target_env = target_parts.get(3).unwrap_or(&"");
-    let target_fn = format!("{}_{}.rs", target_os, target_env);
+    // let target_fn = format!("{}_{}.rs", target_os, target_env);
+    let target_fn = if target_env.is_empty() {
+        format!("{}.rs", target_os)
+    } else {
+        format!("{}_{}.rs", target_os, target_env)
+    };
     let binding_target_path = PathBuf::new().join("src").join(target_fn);
 
     // We need to override the target and sysroot for CLang on Windows GNU;

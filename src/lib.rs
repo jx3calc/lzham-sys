@@ -5,6 +5,11 @@ mod windows_msvc;
 #[cfg(target_env = "msvc")]
 pub use windows_msvc::*;
 
+#[cfg(target_os = "macos")]
+mod darwin;
+#[cfg(target_os = "macos")]
+pub use darwin::*;
+
 #[test]
 fn hello() {
     let input_data = b"Hello, LZHAM!";
