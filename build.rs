@@ -118,13 +118,10 @@ fn main() {
 
     let dst = if is_static {
         Config::new("lzham_codec")
-            .define("CMAKE_BUILD_TYPE", "Release")
             .define("BUILD_SHARED_LIBS", "OFF")
             .build()
     } else {
-        Config::new("lzham_codec")
-            .define("CMAKE_BUILD_TYPE", "Release")
-            .build()
+        Config::new("lzham_codec").build()
     };
 
     println!("cargo:rustc-link-search=native={}/lib", dst.display());
